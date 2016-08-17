@@ -14,7 +14,7 @@
     #info{
       position: absolute;
       display: block;
-      margin: 75% auto;
+      margin: 60% auto;
       width: 100%:
       font-size: 42px;
     }
@@ -32,10 +32,11 @@
       text-align:center;
     }
     *{
-      color: white;
+      color: black;
+      overflow: hidden;
     }
     body{
-      background: blue;
+      background-color: #ededed;
     }
 
     strong{
@@ -59,11 +60,13 @@
     .page{
 
        position: absolute;
-       margin: 5% auto;
+       margin: 5% 5% 0 5%;
+       width: 90%;
        padding: 5%;
        opacity: 60%;
        display: none;
-       background: linear-gradient('circle', blue, white);
+       background-color: #dfe3ee;
+       border-radius: 10%;
     }
 
     .center{
@@ -87,59 +90,14 @@
     }
 </style>
 
-<script>
 
-  $(document).ready(function(){
-
-     var i = 1;
-     var answers = {}
-     $('#page_'+i+'').fadeIn();
-
-     function loadNext(){
-        $('#page_'+i+'').fadeOut('slow').after(function(){
-           i++;
-           if(i==8){
-             console.log(answers)
-             $('#zestaw').html(''+answers+'');
-           }
-           $('#page_'+i+'').slideDown('slow');
-        })
-
-     }
-
-     setInterval(function(){
-        if(i == 7){
-          i++;
-          setTimeout(function(){
-            i--;
-            loadNext();
-          }, 2000)
-        }
-     }, 100)
-
-
-
-     $('.btn').on('click', function(){
-        loadNext();
-     });
-
-     $('input[type="radio"]').on('click', function(){
-         var answ = $(this).val();
-         answers[i] = answ
-        loadNext();
-     })
-
-  })
-
-
-
-</script>
 </head>
 <body>
 
   <div id="fb-root"><script src="https://connect.facebook.net/en_US/all.js"></script></div>
+  <div class="background">
   <div class="container page" id="page_1">
-    <h2>Witaj w Szybkim Kreatorze Suplementacji Bodypak.pl! Opowiedz nam o sobie i wskaż swój cel treningowy, a pokażemy Ci najlepszy dla Ciebie zestaw suplementów, przygotowany przez naszych ekspertów</h2>
+    <h2>Witaj <span id="fb_name"> </span> w Szybkim Kreatorze Suplementacji Bodypak.pl! Opowiedz nam o sobie i wskaż swój cel treningowy, a pokażemy Ci najlepszy dla Ciebie zestaw suplementów, przygotowany przez naszych ekspertów</h2>
     <hr>
     <button class="btn btn-success btn-lg center"> Dalej </button>
   </div>
@@ -152,8 +110,8 @@
 
   <div class="container page" id="page_3">
     <h2> Wskaż płeć</h2>
-      <div class="radio"><label><input type="radio" name="1" value="k"> <strong>kobieta</strong></label>   </div>
-      <div class="radio"><label><input type="radio" name="2" value="m"> <strong>mężczyzna</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="1" value="female"> <strong>kobieta</strong></label>   </div>
+      <div class="radio"><label><input type="radio" name="2" value="male"> <strong>mężczyzna</strong></label>  </div>
     </div>
   </div>
 
@@ -197,12 +155,107 @@
   </div>
 
 
-   <a class="btn btn-block btn-info" id="info" target="_blank" href="http://www.bodypak.pl/pl/kreator-suplementacji?from=home">  Pełna wersja kreatora </a>
+   <form method="post" id="theForm" action="http://www.bodypak.pl/pl/kreator-suplementacji" target="_blank">
+     <input type="hidden" id="name_form" name="name" value="">
+     <input type="hidden" id="gender_form" name="gender" value="">
+     <input type="hidden" id="age_form" name="age" value="">
+     <a href="#" onclick="$(this).closest('form').submit()" class="btn btn-block btn-info" id="info" >  Pełna wersja kreatora </a>
+   </form>
+</div>
+<script>
 
+ $(document).ready(function(){
 
+    var i = 1;
+    var gender='';
+    var name ='';
+    var age=[];
+    var answers = {}
+    $('#page_'+i+'').fadeIn();
 
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1410048089009339',
+        xfbml      : true,
+        version    : 'v2.7'
 
+      });
+      FB.Canvas.setAutoGrow();
 
+      function onLogin(response) {
+        if (response.status == 'connected') {
+          FB.api('/me?fields=id,name,first_name,birthday,gender,age_range', function(data) {
+            console.log(data);
+            gender = data.gender;
+            age= data.age_range;
+            name= data.first_name;
+            $('#fb_name').html(''+name+'');
+            $('#name_form').attr('value', name);
+            $('#gender_form').attr('value', gender);
+          });
+        }
+      }
 
+      FB.getLoginStatus(function(response) {
+        // Check login status on load, and if the user is
+        // already logged in, go directly to the welcome message.
+        if (response.status == 'connected') {
+          onLogin(response);
+        } else {
+          // Otherwise, show Login dialog first.
+          FB.login(function(response) {
+            onLogin(response);
+          }, {scope: 'user_friends, email'});
+        }
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+    function loadNext(){
+       $('#page_'+i+'').fadeOut('slow').after(function(){
+          i++;
+          if(i == 3 && gender.length>0){
+            answers[3] = gender;
+            i++;
+          }
+          if(i==8){
+            console.log(answers)
+            $('#zestaw').html(''+answers[3]+' - '+ answers[4] + ' - '+ answers[5] + ' - '+ answers[6] + ' ');
+          }
+          $('#page_'+i+'').slideDown('slow');
+       })
+
+    }
+
+    setInterval(function(){
+       if(i == 7){
+         i++;
+         setTimeout(function(){
+           i--;
+           loadNext();
+         }, 2000)
+       }
+    }, 100)
+
+    $('.btn').on('click', function(){
+       loadNext();
+    });
+
+    $('input[type="radio"]').on('click', function(){
+        var answ = $(this).val();
+        answers[i] = answ
+       loadNext();
+    })
+
+ })
+
+</script>
 </body>
 </html>
