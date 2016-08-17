@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Quiz </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+
+    #info{
+      position: absolute;
+      display: block;
+      margin: 75% auto;
+      width: 100%:
+      font-size: 42px;
+    }
+    #info h3{
+      width: 100%;
+      text-align: center;
+    }
+    a:link{
+      text-decoration: none!important;
+    }
+    #loading{
+      font-size: 100px;
+      margin-top: 5%;
+      display:block;
+      text-align:center;
+    }
+    *{
+      color: white;
+    }
+    body{
+      background: blue;
+    }
+
+    strong{
+      font-size: 1.5em;
+      margin: 1em;
+    }
+
+    .radio{
+      margin: 1.5em;
+    }
+
+    input[type=radio]{
+        display: inline-block;
+        border: 1px solid #000;
+        border-radius: 50%;
+        margin: 0 2em;
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    .page{
+
+       position: absolute;
+       margin: 5% auto;
+       padding: 5%;
+       opacity: 60%;
+       display: none;
+       background: linear-gradient('circle', blue, white);
+    }
+
+    .center{
+       margin: 0 auto;
+    }
+
+
+    .glyphicon-refresh-animate {
+        -animation: spin .7s infinite linear;
+        -webkit-animation: spin2 .7s infinite linear;
+    }
+
+    @-webkit-keyframes spin2 {
+        from { -webkit-transform: rotate(0deg);}
+        to { -webkit-transform: rotate(360deg);}
+    }
+
+    @keyframes spin {
+        from { transform: scale(1) rotate(0deg);}
+        to { transform: scale(1) rotate(360deg);}
+    }
+</style>
+
+<script>
+
+  $(document).ready(function(){
+
+     var i = 1;
+     var answers = {}
+     $('#page_'+i+'').fadeIn();
+
+     function loadNext(){
+        $('#page_'+i+'').fadeOut('slow').after(function(){
+           i++;
+           if(i==8){
+             console.log(answers)
+             $('#zestaw').html(''+answers+'');
+           }
+           $('#page_'+i+'').slideDown('slow');
+        })
+
+     }
+
+     setInterval(function(){
+        if(i == 7){
+          i++;
+          setTimeout(function(){
+            i--;
+            loadNext();
+          }, 2000)
+        }
+     }, 100)
+
+
+
+     $('.btn').on('click', function(){
+        loadNext();
+     });
+
+     $('input[type="radio"]').on('click', function(){
+         var answ = $(this).val();
+         answers[i] = answ
+        loadNext();
+     })
+
+  })
+
+
+
+</script>
+</head>
+<body>
+
+  <div id="fb-root"><script src="https://connect.facebook.net/en_US/all.js"></script></div>
+  <div class="container page" id="page_1">
+    <h2>Witaj w Szybkim Kreatorze Suplementacji Bodypak.pl! Opowiedz nam o sobie i wskaż swój cel treningowy, a pokażemy Ci najlepszy dla Ciebie zestaw suplementów, przygotowany przez naszych ekspertów</h2>
+    <hr>
+    <button class="btn btn-success btn-lg center"> Dalej </button>
+  </div>
+
+  <div class="container page" id="page_2">
+    <h2> Nie wiesz jakie suplemeny wybrać by uzyskać jeszcze lepsze efekty swoich treningów? Podpowiemy Ci dokładnie czego potrzebujesz</h3>
+    <hr>
+    <button class="btn btn-success btn-lg center"> Dalej </button>
+  </div>
+
+  <div class="container page" id="page_3">
+    <h2> Wskaż płeć</h2>
+      <div class="radio"><label><input type="radio" name="1" value="k"> <strong>kobieta</strong></label>   </div>
+      <div class="radio"><label><input type="radio" name="2" value="m"> <strong>mężczyzna</strong></label>  </div>
+    </div>
+  </div>
+
+  <div class="container page" id="page_4">
+    <h2> Wpisz swój wiek</h2>
+      <div class="radio"><label><input type="radio" name="1" value="<21"><strong>do 20 lat</strong></label>   </div>
+      <div class="radio"><label><input type="radio" name="2" value="21-30"> <strong>21-30 lat</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="3" value="31-40"><strong> 31-40 lat</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="4" value=">41"> <strong>pow. 40 lat</strong></label>  </div>
+  </div>
+
+  <div class="container page" id="page_5">
+    <h2> Wpisz cel treningowy </h2>
+
+      <div class="radio"><label><input type="radio" name="1" value="masa"><strong>przyrost masy mięśniowej</strong></label> </div>
+      <div class="radio"><label><input type="radio" name="2" value="waga"><strong>przyrost wagi</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="3" value="sila"><strong>zwiększenie siły</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="4" value="wytrzymalosc"><strong>zwiększenie wytrzymałości</strong> </label></div>
+      <div class="radio"><label><input type="radio" name="5" value="zdrowie"><strong>poprawa zdrowia</strong> </label>  </div>
+  </div>
+
+  <div class="container page" id="page_6">
+    <h2> Jaki budżet możesz przeznaczyć miesięcznie na suplementacje? </h2>
+      <div class="radio"><label><input type="radio" name="1" value="<150"><strong>do 150 zł</strong></label>   </div>
+      <div class="radio"><label><input type="radio" name="2" value="<300"><strong>do 300 zł</strong></label>  </div>
+      <div class="radio"><label><input type="radio" name="3" value=">300"><strong>pow. 300 zł</strong></label>  </div>
+  </div>
+
+  <div class="container page" id="page_7">
+       <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" id="loading">
+       </span>
+  </div>
+
+  <div class="container page" id="page_8">
+    <h2> Proponujemy dla Ciebie zestaw:</h2>
+    <div id="zestaw">
+    </div>
+    <br>
+    <h3>Cena: </h2>
+    <h4><a class="btn btn-info"> Dowiedz się więcej... </a></h4></h4>
+  </div>
+
+
+   <a class="btn btn-block btn-info" id="info" target="_blank" href="http://www.bodypak.pl/pl/kreator-suplementacji?from=home">  Pełna wersja kreatora </a>
+
+
+
+
+
+
+</body>
+</html>
