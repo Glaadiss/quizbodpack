@@ -80,9 +80,11 @@ $(document).ready(function(){
             link = href + pack.link + params;
             const name = pack.link.split('-').slice(1,-2).map(function(a){ return a.capitalize() }).join(' ');
             $('#zestaw').attr('href', link);
-            $('#zestaw').html(name);
+            pack.products.split('&').forEach(function(e){
+              $('<li>' + e + '</li>').appendTo('#in-pack');
+            })
             pack.pictures.split(' ').forEach(function(e, index){
-              $('<div class="item"><img src="' + e + '" alt="bodypak-photo" height="300px" width="cover"><div class="carousel-caption"></div></div>').appendTo('.carousel-inner');
+              $('<div class="item"><img class="products" src="' + e + '" alt="bodypak-photo"><div class="carousel-caption"></div></div>').appendTo('.carousel-inner');
               $('<li data-target="#carousel-example-generic" data-slide-to="'+index+'"></li>').appendTo('.carousel-indicators');
             });
             $('.item').first().addClass('active');
@@ -109,6 +111,13 @@ $(document).ready(function(){
     $('.btn').on('click', function(){
       if(i < 8)
         loadNext();
+    });
+
+    $('.show-params').hover( function(){
+      console.log('something')
+      $('.information').fadeIn(500);
+    }, function(){
+      $('.information').fadeOut(500);
     });
 
     $('input[type="radio"]').on('click', function(){

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title> Quiz </title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -85,9 +85,9 @@
       <div class="hh">
         <h2> Wpisz cel treningowy </h2>
         <div class="left">
-          <div class="radio"><label><input type="radio" name="1" value="a"><strong>przyrost wagi i masy mięśniowej</strong></label> </div>
-          <div class="radio"><label><input type="radio" name="3" value="b"><strong>zwiększenie siły</strong></label>  </div>
-          <div class="radio"><label><input type="radio" name="4" value="c"><strong>zwiększenie wytrzymałości</strong> </label></div>
+          <div class="radio"><label><input type="radio" name="1" value="a"><strong>przyrost siły i masy mięśniowej</strong></label> </div>
+          <div class="radio"><label><input type="radio" name="3" value="b"><strong>redukcja tkanki tłuszczowej</strong></label>  </div>
+          <div class="radio"><label><input type="radio" name="4" value="c"><strong>poprawa wytrzymałości</strong> </label></div>
           <div class="radio"><label><input type="radio" name="5" value="d"><strong>poprawa zdrowia</strong> </label>  </div>
         </div>
       </div>
@@ -123,11 +123,15 @@
   <div class="page" id="page_8">
     <div class="container alert dark welcome">
       <div class="hh">
+        <div class="information">
+          <h3>Zawartość zestawu: </h3>
+          <ul id="in-pack"></ul>
+        </div>
         <div id="carousel-example-generic">
           <!-- Indicators -->
-          <ol class="carousel-indicators"></ol>
+          <ol class="carousel-indicators" style="margin-bottom: -1%;"></ol>
           <!-- Wrapper for slides -->
-          <div class="carousel-inner"></div>
+          <div class="carousel-inner" ></div>
           <!-- Controls -->
           <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -137,7 +141,10 @@
           </a>
         </div>
         <!-- <iframe id="content-frame" name="content-frame" frameborder="0" width="600px" height="350px"></iframe> -->
-        <h1><a class="btn dark" id="zestaw" href="" target="_blank"> Dowiedz się więcej! </a></h1>
+        <h1><a class="btn dark" id="zestaw" href="" target="_blank"> Zobacz Pakiet Produktów! </a>
+            <span class="glyphicon glyphicon-search show-params" aria-hidden="true"></span>
+        </h1>
+
         <br>
         <!-- <h4><a class="btn dark"> Dowiedz się więcej... </a></h4></h4> -->
       </div>

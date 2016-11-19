@@ -3,6 +3,78 @@
   /*overflow:hidden;*/
   font-family: 'Exo 2', sans-serif;
 }
+ul {
+  list-style-type: none;
+}
+.information{
+  display: none;
+  position: absolute;
+  left: 30vw;
+  background: rgba(0,0,0,0.8);
+  padding: 10px;
+  margin: 0 auto;
+  z-index: 9999;
+  width: 40vw;
+  height: 45vh;
+}
+
+@keyframes pulse_animation {
+	0% { transform: scale(1); }
+	30% { transform: scale(1); }
+	40% { transform: scale(1.08); }
+	50% { transform: scale(1); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.05); }
+	80% { transform: scale(1); }
+	100% { transform: scale(1); }
+}
+.show-params{
+    font-size: 34px;
+    z-index: 9999;
+    background-color: #001744;
+    border-radius: 100px;
+    padding: 1.5%;
+    opacity: 0.8;
+    cursor: pointer;
+    animation-name: pulse_animation;
+    animation-duration: 2000ms;
+    transform-origin:70% 70%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#in-pack{
+  text-align: center;
+}
+#in-pack > li {
+  margin-left: -10%;
+  margin-top: 4%;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    left: 10% !important;
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    left: 83% !important;
+}
+.carousel-control {
+    width: 35% !important;
+}
+.left {
+    width: 500px;
+}
+.item{
+  max-height: 350px !important;
+}
+.products{
+  height: 324px !important;
+  margin: 0 auto;
+}
+#zestaw {
+  background-color: white;
+  color: #001744;
+  padding: 15px;
+  font-weight: 900;
+}
 .dark{
   background-color: #001744;
   color: white;
@@ -33,7 +105,7 @@
 .hh{
   text-align: center;
   padding: 2%;
-  padding-top: 0;
+  padding-top: 0.5%;
   background-color: rgba(0, 119, 188, 0.9);
   border-radius: 2%;
 }
@@ -83,7 +155,7 @@ input[type=radio]{
     display: inline-block;
     border: 1px solid #000;
     border-radius: 50%;
-    margin: 0 2em;
+    margin: 0.5em 2em;
     width: 1.5em;
     height: 1.5em;
 }
