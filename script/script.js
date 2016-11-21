@@ -74,23 +74,25 @@ $(document).ready(function(){
             i++;
           }
           if(i==7){
+            // const links = pack.desc.map( function(g) { return ( g.map(function(o) {  return '<li>' + k + '</li>'  }).split('') ) });
             const href = 'http://www.bodypak.pl/pl/zestawy/';
             const params = '?utm_campaign=fbkreator&utm_source=facebook&utm_medium=SzybkiKreatorSuplementacji';
             const pack = getLink(data);
             link = href + pack.link + params;
             const name = pack.link.split('-').slice(1,-2).map(function(a){ return a.capitalize() }).join(' ');
             $('#zestaw').attr('href', link);
-            pack.products.split('&').forEach(function(e){
-              $('<li>' + e + '</li>').appendTo('#in-pack');
-            })
             pack.pictures.split(' ').forEach(function(e, index){
-              $('<div class="item"><img class="products" src="' + e + '" alt="bodypak-photo"><div class="carousel-caption"></div></div>').appendTo('.carousel-inner');
+              let links = pack.products.split('&').map(function(e){ return '<li>'  + e + '</li>' }).join(' ');
+              let name = '';
+              if ( index > 0 )
+                if (pack.desc[index -1 ]) { links = pack.desc[index - 1].map(function(k) { return '<li> ' + k + '</li>'  } ).join(' '); name = pack.name[index - 1] };
+              $('<div class="item"> <div class="row"> <div class="col-xs-4"> <img class="products" src="' + e + '" alt="bodypak-photo"> <div class="product_name">' + name + '</div></div> <div class="col-xs-8"> <ul class="desc-list">' + links+ '</ul> </div> </div<  </div>').appendTo('.carousel-inner');
               $('<li data-target="#carousel-example-generic" data-slide-to="'+index+'"></li>').appendTo('.carousel-indicators');
             });
             $('.item').first().addClass('active');
             $('.carousel-indicators > li').first().addClass('active');
             setTimeout(function(){
-              $('#carousel-example-generic').attr('class', 'carousel slide');
+              $('#carousel-example-generic').attr('class', 'carousel');
               $('#carousel-example-generic').attr('data-ride', 'carousel');
               $('#carousel-example-generic').carousel();
             }, 100);

@@ -6,6 +6,29 @@
 ul {
   list-style-type: none;
 }
+.product_name{
+  margin-left: 22%;
+  margin-top: -2%;
+  font-weight: 800;
+  color: #001744; !important;
+}
+.desc-list{
+  margin-top: 7%;
+  padding: 1%;
+}
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+.in_slider{
+  float: left;
+}
+.desc-list > li {
+  color: #001744; !important;
+  font-weight: 800;
+  text-align: left;
+  margin-left: 3%;
+  margin-top: 2%;
+}
 .information{
   display: none;
   position: absolute;
@@ -57,22 +80,27 @@ ul {
     left: 83% !important;
 }
 .carousel-control {
+    background: none !important;
     width: 35% !important;
 }
 .left {
     width: 500px;
 }
 .item{
-  max-height: 350px !important;
+  height: 310px !important;
+  background-color: rgba(255,255,255,0.9) !important;
+}
+.row{
+  max-height: 250px !important;
 }
 .products{
-  height: 324px !important;
-  margin: 0 auto;
+  height: 255px !important;
 }
 #zestaw {
   background-color: white;
   color: #001744;
   padding: 15px;
+  margin-bottom: 0;
   font-weight: 900;
 }
 .dark{
@@ -102,6 +130,17 @@ ul {
   background-image: url('../qwe.jpg');
 }
 
+li:before {
+    content: "\f00c";
+    font-family: "FontAwesome";
+    margin-right: 1%;
+    color: #0077bc;
+}
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .hh{
   text-align: center;
   padding: 2%;
